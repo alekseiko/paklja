@@ -133,6 +133,11 @@ def create_project(args):
                                    os.path.join(project_name, file_name),
                                    {"current_year": date.today().year,
                                     "project_name": project_name})
+    try:
+        subprocess.call(["git", "init", "-q", project_name])
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            print "ERORR: Please install git and run tow again"
 
 
 def usage():
