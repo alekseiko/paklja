@@ -14,12 +14,12 @@ if [ -d "{{volume_name}}" ]; then
 fi
 
 {% if entrypoint %}
-command="{{entrypoint}} {{cmd}} $*"
+command='{{entrypoint}} {{cmd}} $*'
 {% else %}
-command="{{cmd}}"
+command='{{cmd}}'
 {% endif %}
 
 PATH=$PATH:`pwd`
 
 # execute entire command
-"$command"
+sh -c "$command"
