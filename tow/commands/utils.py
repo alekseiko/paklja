@@ -15,6 +15,53 @@ import collections
 TOW_VOLUME = "/tow"
 
 
+class answer:
+    ALL = 'ALL'
+    YES = True
+    NO = False
+
+
+class shell_colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+def print_warning(msg):
+    print("%s%s%s" % (shell_colors.WARNING, msg, shell_colors.ENDC))
+
+
+def print_ok(msg):
+    print "%s%s%s" % (shell_colors.OKGREEN, msg, shell_colors.ENDC)
+
+
+def print_fail(msg):
+    print "%s%s%s" % (shell_colors.FAIL, msg, shell_colors.ENDC)
+
+
+def yes_no_all_prompt(msg, default='no'):
+    def_value = getattr(answer, default.upper())
+    try:
+        ans = raw_input(
+            "%s%s%s" % (shell_colors.FAIL, msg, shell_colors.ENDC)).lower()
+        if ans not in ['y', 'n', 'a', '']:
+            print 'Please enter y/n/a.'
+            return None
+        elif answer == 'y':
+            return answer.YES
+        elif answer == 'a':
+            return answer.ALL
+        elif answer == 'n':
+            return answer.NO
+    except EOFError:
+        return def_value
+
+
 def project_paths():
     current_dir = os.getcwd()
     return (current_dir,
